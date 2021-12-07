@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
     TextView countrytextview;
     RecyclerView countryRecyclerview;
 
-
-
     //ArrayList<Country> apiCountrydata;
     //Country  coutryObj = new Country();
     //String apiCountrydata;
@@ -35,13 +33,10 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         networkingService = ((myApp)getApplication()).getNetworkingService();
+        jsonService =  ((myApp)getApplication()).getJsonService();
         networkingService.listener =this;
         networkingService.fetchCountryData();
-
-        jsonService =  ((myApp)getApplication()).getJsonService();
-
         countrytextview = findViewById(R.id.intro_textView);
         countryRecyclerview = findViewById(R.id.CountryRecyclerView);
         countryRecyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -54,12 +49,14 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
 
     @Override
     public void APINetworkListenerForCountryData(String jsonString) {
-        System.out.println(jsonString);
+       // System.out.println(jsonString);
         Log.d("country details", jsonString);// not parsed yet.
         //apiCountrydata = jsonService.parseCountriesFromJsonAPIData(jsonString);
         data = jsonService.parseCountriesFromJsonAPIData(jsonString);
 
-        Log.d("data", data.toString()); }
+        Log.d("Printin my data", data.get(0).getCountryName() + data.get(1).getCountryName()+data.get(2).getCountryName());
+        System.out.println("****************************THis is my data :" + data.toString()+" ");
+    }
 
     @Override
     public void APINetworkingListerForImage(Bitmap image) {

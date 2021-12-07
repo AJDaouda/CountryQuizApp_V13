@@ -8,18 +8,18 @@ public class Country {
 
     //Creating Constructors
 
-    public Country() { }
+//    public Country() { }
+//
+//    public Country(String emoji) { }
+//
+//    public Country(String code, String countryName){
+//        this.code = this.code;
+//        this.countryName = this.countryName;}
 
-    public Country(String emoji) { }
-
-    public Country(String code, String countryName){
-        this.code = this.code;
-        this.countryName = this.countryName;}
-
-    public Country(String code, String country, String continent) {//Used in "JsonService" in "" method
+    public Country(String code, String country) {//Used in "JsonService" in "" method
         this.code = code;
         this.countryName = country;
-        this.continent = continent;}
+        }
 
     public Country(String code, String country, String emoji, String continent) {//Used in "JsonService" in "" method
         this.code = code;
@@ -65,4 +65,11 @@ public class Country {
         dest.writeString(code);
         dest.writeString(countryName);}*/
 
+    @Override
+    public String toString() {
+        return "Country{" +
+                "code='" + code + '\'' +
+                ", countryName='" + countryName + '\'' +
+                '}';
+    }
 }

@@ -8,10 +8,9 @@ import java.util.ArrayList;
 
 public class JsonService {
     ArrayList<Country> allCountriesFromAPI = new ArrayList<>(0);
-    ArrayList<Country> allRequiredCountries;
-    ArrayList<Country> allRequiredCountryEmojis = new ArrayList<>(0);
-    Country data;
-    //String emoji="";
+   // ArrayList<Country> allRequiredCountries;
+    //ArrayList<Country> allRequiredCountryEmojis = new ArrayList<>(0);
+       //String emoji="";
     //public ArrayList<Country> parseCountriesFromJsonAPIData(String jsonStringfromAPI){
     public ArrayList<Country> parseCountriesFromJsonAPIData(String jsonStringfromAPI){
         try {
@@ -24,7 +23,7 @@ public class JsonService {
                 if (continentName.equals("Africa")) {
                     String code = country.getString("countryCode");
                     String countryName = country.getString("countryName");
-                    allCountriesFromAPI.add(data = new Country(code,countryName));
+                    allCountriesFromAPI.add(new Country(code,countryName));
                 }
             }
 

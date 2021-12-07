@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CountryQuizApp</string>
+    <string name="introduction_text">Take a quiz</string>
+
 </resources>
