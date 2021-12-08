@@ -16,7 +16,7 @@ public class RandomCountryManager {
         flags.add(country2);
         MainRandomCountry country3 = new MainRandomCountry(R.drawable.bj);
         flags.add(country3);
-        MainRandomCountry country4 = new MainRandomCountry(R.drawable.cd);
+        MainRandomCountry country4 = new MainRandomCountry(R.drawable.cd);,x;
         flags.add(country4);
         MainRandomCountry country5 = new MainRandomCountry(R.drawable.cf);
         flags.add(country5);
