@@ -16,7 +16,7 @@ public class RandomCountryManager {
         flags.add(country2);
         MainRandomCountry country3 = new MainRandomCountry(R.drawable.bj);
         flags.add(country3);
-        MainRandomCountry country4 = new MainRandomCountry(R.drawable.cd);,x;
+        MainRandomCountry country4 = new MainRandomCountry(R.drawable.cd);
         flags.add(country4);
         MainRandomCountry country5 = new MainRandomCountry(R.drawable.cf);
         flags.add(country5);
@@ -28,6 +28,9 @@ public class RandomCountryManager {
         flags.add(country8);
         MainRandomCountry country9 = new MainRandomCountry(R.drawable.cv);
         flags.add(country9);
+
+
+        /*
         MainRandomCountry country10 = new MainRandomCountry(R.drawable.dj);
         flags.add(country10);
         MainRandomCountry country11 = new MainRandomCountry(R.drawable.dz);
@@ -41,7 +44,7 @@ public class RandomCountryManager {
         MainRandomCountry country15 = new MainRandomCountry(R.drawable.et);
         flags.add(country15);
 
-        /*
+
         MainRandomCountry country16 = new MainRandomCountry(R.drawable.ga);
         MainRandomCountry country17 = new MainRandomCountry(R.drawable.gh);
         MainRandomCountry country18 = new MainRandomCountry(R.drawable.gm);

@@ -39,7 +39,7 @@ public class CountryListActivity extends AppCompatActivity implements NetworkSer
         System.out.println("****************************THis is my data :" + countrydata.toString()+" ");
         adapter.listener = this;
         countryRecyclerview.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 
 
@@ -51,10 +51,9 @@ public class CountryListActivity extends AppCompatActivity implements NetworkSer
         countrydata = jsonService.parseCountriesFromJsonAPIData(jsonString);
         Log.d("Printin my data", countrydata.get(0).getCountryName() + " " + countrydata.get(1).getCountryName()+ " " +countrydata.get(2).getCountryName());
         System.out.println("****************************THis is my data :" + countrydata.toString()+" ");
+        adapter.allCountriesList = countrydata;
         adapter.notifyDataSetChanged();
     }
-
-
 
 
     @Override
@@ -63,9 +62,9 @@ public class CountryListActivity extends AppCompatActivity implements NetworkSer
 
     @Override
     public void onCountrySelected(Country seletedCountry) {
-        String code = seletedCountry.getCountryCode().toString().toLowerCase();
+        String countryCode = seletedCountry.getCountryCode().toString().toLowerCase();
         Intent toQuizActivity = new Intent(this, QuizActivity.class);
-        toQuizActivity.putExtra("Country flag",code);
+        toQuizActivity.putExtra("Country flag",countryCode);
         startActivity(toQuizActivity);
         // System.out.println("My history details are: \n"+ selectedHistory.toString());
         Toast.makeText(this, "Country flag being sent", Toast.LENGTH_SHORT).show();

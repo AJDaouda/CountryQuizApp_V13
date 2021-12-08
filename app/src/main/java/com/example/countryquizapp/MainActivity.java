@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements NetworkService.NetworkingListener {
 
     RandomCountryManager rcMng;
     ImageView randomFlag;
@@ -49,6 +49,16 @@ public class MainActivity extends AppCompatActivity  {
         Intent toQuizActivity = new Intent(this, CountryListActivity.class);
         //toQuizActivity.putExtra("countryName",code);
         startActivity(toQuizActivity);
+    }
+
+    @Override
+    public void APINetworkListenerForCountryData(String jsonString) {
+
+    }
+
+    @Override
+    public void APINetworkingListerForImage(Bitmap image) {
+
     }
 }
 
