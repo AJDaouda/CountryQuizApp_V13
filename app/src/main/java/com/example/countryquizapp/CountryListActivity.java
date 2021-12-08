@@ -1,47 +1,74 @@
 package com.example.countryquizapp;
 
-public class CountryListActivity {//implements NetworkService.NetworkingListener
-    /*
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+public class CountryListActivity extends AppCompatActivity implements NetworkService.NetworkingListener,CountryListAdapter.ListClickListener{
+
     NetworkService networkingService;
-    JsonService  jsonService;
+    JsonService jsonService;
 
-    FragmentManager fm = getSupportFragmentManager();
+    //Layout Widgets declaration
+    // TextView countrytextview;
+    RecyclerView countryRecyclerview;
 
-    //ArrayList<Country> apiCountrydata;
-    //Country  coutryObj = new Country();
-    //String apiCountrydata;
-    ArrayList<Country> data = new ArrayList<Country>(0);
-    ArrayList<Country>emojis = new ArrayList<Country>(0);
-    int index = 0;
-
+    ArrayList<Country> countrydata = new ArrayList<Country>(0);
+    CountryListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_country_list);
         networkingService = ((myApp)getApplication()).getNetworkingService();
-        networkingService.listener =this;
-
-        networkingService.fetchCountryData();
-        networkingService.fetchEmojiData();
-
         jsonService =  ((myApp)getApplication()).getJsonService();
 
-
+        networkingService.listener =this;
+        networkingService.fetchCountryData();
+        //countrytextview = findViewById(R.id.intro_textView);
+        countryRecyclerview = findViewById(R.id.CountryRecyclerView);
+        countryRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new CountryListAdapter(this, countrydata);
+        System.out.println("****************************THis is my data :" + countrydata.toString()+" ");
+        adapter.listener = this;
+        countryRecyclerview.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
+
 
 
     @Override
     public void APINetworkListenerForCountryData(String jsonString) {
-        System.out.println(jsonString);
+        // System.out.println(jsonString);
         Log.d("country details", jsonString);// not parsed yet.
-        //apiCountrydata = jsonService.parseCountriesFromJsonAPIData(jsonString);
-        data = jsonService.parseCountriesFromJsonAPIData(jsonString);
-        Log.d("data", data.toString()); }
+        countrydata = jsonService.parseCountriesFromJsonAPIData(jsonString);
+        Log.d("Printin my data", countrydata.get(0).getCountryName() + " " + countrydata.get(1).getCountryName()+ " " +countrydata.get(2).getCountryName());
+        System.out.println("****************************THis is my data :" + countrydata.toString()+" ");
+        adapter.notifyDataSetChanged();
+    }
+
+
+
 
     @Override
-    public void APINetworkListenerForCountryEmoji(String jsonString) {
-        System.out.println(jsonString);
-        Log.d("emoji details", jsonString);
-        emojis = jsonService.parseCountryEmojiFromJsonAPIData(jsonString); }*/
+    public void APINetworkingListerForImage(Bitmap image) {
+    }
+
+    @Override
+    public void onCountrySelected(Country seletedCountry) {
+        String code = seletedCountry.getCountryCode().toString().toLowerCase();
+        Intent toQuizActivity = new Intent(this, QuizActivity.class);
+        toQuizActivity.putExtra("Country flag",code);
+        startActivity(toQuizActivity);
+        // System.out.println("My history details are: \n"+ selectedHistory.toString());
+        Toast.makeText(this, "Country flag being sent", Toast.LENGTH_SHORT).show();
+
+    }
 }

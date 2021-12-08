@@ -2,4 +2,10 @@
     <string name="app_name">CountryQuizApp</string>
     <string name="introduction_text">Take a quiz</string>
 
+    <!-- Buttons-->
+    <string name="btnT_name">TRUE</string>
+    <string name="btnF_name">FALSE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

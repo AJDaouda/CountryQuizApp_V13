@@ -4,10 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Manjaly/Documents/Android/CountryQuizApp/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/Final Project App/Second Draft/app/src/main/res/layout/activity_country_list.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/Final Project App/Second Draft/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp/CountryQuizApp/app/src/main/res/layout/activity_country_list.xml" value="0.2796875" />
         <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp/CountryQuizApp/app/src/main/res/layout/activity_main.xml" value="0.2796875" />
         <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp/CountryQuizApp/app/src/main/res/layout/activity_quiz.xml" value="0.2796875" />
         <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp/CountryQuizApp/app/src/main/res/layout/recycler_row_item_for_country.xml" value="0.2796875" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp2/app/src/main/res/layout/activity_country_list.xml" value="0.2796875" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp2/app/src/main/res/layout/activity_country_list2.xml" value="0.2796875" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp2/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp2/app/src/main/res/layout/activity_quiz.xml" value="0.2796875" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp2/app/src/main/res/layout/fragment_question.xml" value="0.265625" />
+        <entry key="..\:/Users/jalil/Documents/YMCA Certificate/Technical Training/Lectures/Android/MyApp2/app/src/main/res/layout/recycler_row_item_for_country.xml" value="0.146875" />
       </map>
     </option>
   </component>
