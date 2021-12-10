@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Activities_Helpers.MainActivity">
 
-    <ImageView
-        android:id="@+id/random_flag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/CountryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline1"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        />
-    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- and ends with -->
+    <!--
+    android:text="@string/introduction_text"
+
+
+    <TextView
+        android:id="@+id/intro_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
-        app:layout_constraintBottom_toTopOf="@id/guideline3">
-        <TextView
-            android:id="@+id/country_description"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="20dp"
-            android:text="You think you know this country???
-                                                  Click on the button below to take a quiz" />
-
-    </LinearLayout>
-
-
-
-    <Button
-        android:id="@+id/quiz_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="btnClicked"
-        android:text="Take a quiz"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        android:lines="2"
+        android:gravity="center"
+        android:text="You think you know these countries???
+                                                  Click a country and take a quiz"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.10"/>
+
+
+    <TextView
+    android:id="@+id/intro_textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/guideline2"
+    android:lines="2"
+    android:gravity="center"
+    android:text="@string/introduction_text"
+    android:textColor="@color/black"
+    android:textStyle="bold"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintGuide_percent="0.20" />-->

@@ -1,4 +1,4 @@
-package com.example.countryquizapp;
+package com.example.countryquizapp.Activities_Helpers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,7 +23,7 @@ public class NetworkService {
     //Instanciating URL strings
     //String countryURL = "https://api.first.org/data/v1/countries";
     String countryURL ="https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json";
-    String flagURL1 = "https://flagcdn.com/80x60/";
+    String flagURL1 = "https://flagcdn.com/256x192/";
     String flagURL2 = ".png";
 
     public static final ExecutorService networkingExecutor = Executors.newFixedThreadPool(4);

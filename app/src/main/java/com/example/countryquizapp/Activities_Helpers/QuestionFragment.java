@@ -1,4 +1,4 @@
-package com.example.countryquizapp;
+package com.example.countryquizapp.Activities_Helpers;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.countryquizapp.R;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link QuestionFragment#newInstance} factory method to
@@ -17,11 +19,14 @@ import android.widget.TextView;
 public class QuestionFragment extends Fragment {
 
     // TODO: Rename and change types and number of parameters
-    public static QuestionFragment newInstance(int qId, int colorId) {
+    public static QuestionFragment newInstance(String  question, String[] potentialAnswers) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
-        args.putInt("QuestonId", qId);
-        args.putInt("ColorId", colorId);
+        //args.putInt("QuestonId", qId);
+        //args.putInt("ColorId", colorId);
+
+        args.putString("QuestonId", question);
+        //args.putStringArray("AnswersId",potentialAnswers);
         fragment.setArguments(args);
         return fragment; }
 
@@ -33,9 +38,8 @@ public class QuestionFragment extends Fragment {
         // Inflating the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_question, container, false);
         TextView QText = (TextView)v.findViewById(R.id.qText_id);
-
-        QText.setText(getArguments().getInt("QuestonId"));
-        QText.setBackgroundResource(getArguments().getInt("ColorId"));
+        QText.setText(getArguments().getString("QuestonId"));
+        //QText.setBackgroundResource(getArguments().getInt("ColorId"));
         return v;
     }
 }

@@ -1,15 +1,15 @@
-package com.example.countryquizapp;
+package com.example.countryquizapp.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Country implements Parcelable {
-String code;
-String countryName;
-String continent;
+private String code;
+private String countryName;
+private String continent;
 
 //Creating Constructors
-public Country() { }
+public Country(String code, String countryName, String capitalCity, String population, String countryCurrencyCode) { }
 
 //    public Country(String code, String countryName){
 //        this.code = this.code;
@@ -19,12 +19,7 @@ public Country(String code, String country) {//Used in "JsonService" in "" metho
     this.code = code;
     this.countryName = country; }
 
-/*public Country(String code, String country, String continent) {//Used in "JsonService" in "" method
-    this.code = code;
-    this.countryName = country;
-    this.continent = continent;}*/
-
-// Creating getters
+    // Creating getters
 public String getCountryCode() {return code;}
 public String getCountryName() {return countryName;}
 public String getContinent() {return continent;}
@@ -37,7 +32,7 @@ public void setContinent(String continent) {this.continent = continent;}
 //Implementing Parcelable methods
 protected Country(Parcel in) {
     code = in.readString();
-    //countryName = in.readString();
+    countryName = in.readString();
 }
 public static final Creator<Country> CREATOR = new Creator<Country>() {
 
@@ -55,7 +50,7 @@ public int describeContents() {
 @Override
 public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(code);
-    //dest.writeString(countryName);
+    dest.writeString(countryName);
 }
 
    /* @Override
@@ -66,6 +61,7 @@ public void writeToParcel(Parcel dest, int flags) {
                 '}'; }*/
    @Override
    public String toString() {return "{" + "code:'" + code + ", countryName:'" + countryName+'}';}
+
 
 }
 /*

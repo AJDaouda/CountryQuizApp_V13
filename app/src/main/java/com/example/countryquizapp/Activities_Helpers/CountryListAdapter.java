@@ -1,4 +1,4 @@
-package com.example.countryquizapp;
+package com.example.countryquizapp.Activities_Helpers;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,19 +8,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.countryquizapp.Model.Country;
+import com.example.countryquizapp.Model.CountryDetails;
+import com.example.countryquizapp.R;
+
 import java.util.ArrayList;
 
 public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.viewHolder> {
     Context cContext;
-    ArrayList<Country> allCountriesList;
+    ArrayList<CountryDetails> allCountriesList;
 
-    public CountryListAdapter(Context c, ArrayList<Country> countries) {
+    public CountryListAdapter(Context c, ArrayList<CountryDetails> countries) {
         cContext = c;
         allCountriesList = countries; }
 
 
     public interface ListClickListener{
-        void onCountrySelected(Country seletedCountry);}
+        void onCountrySelected(CountryDetails seletedCountry);}
 
     public ListClickListener listener;
     // inner class
@@ -28,12 +32,16 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
     // static = able to access it from the class without creating object
     public static class viewHolder extends RecyclerView.ViewHolder{
         private final TextView cName;
+       // private final TextView cFlag;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            cName=itemView.findViewById(R.id.RecyclerCountryName); }
+            cName=itemView.findViewById(R.id.RecyclerCountryName);
+           // cFlag=itemView.findViewById(R.id.RecyclerCountryFlag);
+        }
 
         public TextView getcName() {return cName;}
+       // public TextView getcFlag() {return cFlag;}
     }
 
     @NonNull
@@ -45,6 +53,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         holder.getcName().setText(allCountriesList.get(position).getCountryName());
+        //holder.getcName().setText(allCountriesList.get(position).getFlagEmoji());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
