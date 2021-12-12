@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class QuizQuestion {
     private String question;
     private String correctAnswer;
-    private String[] potentialAnswers;
+    private String[] potentialAnswers = new String[3];
 
     public QuizQuestion() { }
 

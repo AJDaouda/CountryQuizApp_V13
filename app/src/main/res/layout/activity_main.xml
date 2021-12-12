@@ -10,6 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CountryRecyclerView"
+        android:background="@drawable/img_5264"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
 
     <!-- and ends with -->
     <!--
+    android:background="@drawable/img_5263"
     android:text="@string/introduction_text"
 
 

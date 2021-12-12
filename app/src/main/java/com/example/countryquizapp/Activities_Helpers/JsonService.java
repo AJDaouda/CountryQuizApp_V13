@@ -1,6 +1,5 @@
 package com.example.countryquizapp.Activities_Helpers;
 
-import com.example.countryquizapp.Model.Country;
 import com.example.countryquizapp.Model.CountryDetails;
 
 import org.json.JSONArray;

@@ -8,50 +8,100 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- -->
+    <!-- AlertDialog Buttons-->
+    <string name="nextStep_text">Next Step</string>
+    <string name="btn_save">SAVE</string>
+    <string name="btn_ignore">IGNORE</string>
 
-    <!--Flags-->
+    <!--
+    <string name="_flag">   </string>
+    <string name="_flag">   </string>
+    <string name="_flag">   </string>
+     <string name="_flag">   </string>
+    <string name="_flag">   </string>
+    -->
+
+    <!--Flags  -->
     <string name="ao_flag">\uD83C\uDDE6\uD83C\uDDF4</string>
     <string name="bf_flag">\uD83C\uDDE7\uD83C\uDDEB</string>
     <string name="bi_flag">\uD83C\uDDE7\uD83C\uDDEE</string>
     <string name="bj_flag">\uD83C\uDDE7\uD83C\uDDEF</string>
-    <string name="bw_flag">\uD83C\uDDE7\uD83C\uDDFC</string>
-    <string name="cd_flag">\uD83C\uDDE8\uD83C\uDDE9</string>
-    <string name="cf_flag">\uD83C\uDDE8\uD83C\uDDEB</string>
-    <string name="cg_flag">\uD83C\uDDE8\uD83C\uDDEC</string>
-    <string name="ci_flag">\uD83C\uDDE8\uD83C\uDDEE</string>
-    <string name="cm_flag">\uD83C\uDDE8\uD83C\uDDF2</string>
+    <string name="bw_flag">🇧🇼</string>
+    <string name="cd_flag">🇨🇩</string>
+    <string name="cf_flag">🇨🇫</string>
+    <string name="cg_flag">🇨🇬</string>
+    <string name="ci_flag">🇨🇮</string>
+    <string name="cm_flag">🇨🇲</string>
+    <string name="cv_flag">🇨🇻</string>
+    <string name="dj_flag">🇩🇯</string>
+    <string name="dz_flag">🇩🇿</string>
+    <string name="eg_flag">🇪🇬</string>
+    <string name="eh_flag">🏳️</string>
+    <string name="er_flag">🇪🇷</string>
+    <string name="et_flag">🇪🇹</string>
+    <string name="ga_flag">🇬🇦</string>
+    <string name="gh_flag">🇬🇭</string>
+    <string name="gm_flag">🇬🇲</string>
+    <string name="gn_flag">🇬🇳</string>
+    <string name="gq_flag">🇬🇶</string>
+    <string name="gw_flag">🇬🇼</string>
+    <string name="ke_flag">🇰🇪</string>
+    <string name="km_flag">🇰🇲</string>
+    <string name="lr_flag">🇱🇷</string>
+    <string name="ls_flag">🇱🇸</string>
+    <string name="ly_flag">🇱🇾</string>
+    <string name="ma_flag">🇲🇦</string>
+    <string name="mg_flag">🇲🇬</string>
+    <string name="ml_flag">🇲🇱</string>
+    <string name="mr_flag">🇲🇷</string>
+    <string name="mu_flag">🇲🇺</string>
+    <string name="mw_flag">🇲🇼</string>
+    <string name="mz_flag">🇲🇿</string>
+    <string name="na_flag">🇳🇦</string>
+    <string name="ne_flag">🇳🇪</string>
+    <string name="ng_flag">🇳🇬</string>
+    <string name="re_flag">🇫🇷</string>
+    <string name="rw_flag">🇷🇼</string>
+    <string name="sc_flag">🇸🇨</string>
+    <string name="sd_flag">🇸🇩</string>
+    <string name="sh_flag">🏳️</string>
+    <string name="sl_flag">🇸🇱</string>
+    <string name="sn_flag">🇸🇳</string>
+    <string name="so_flag">🇸🇴</string>
+    <string name="ss_flag">🇸🇸</string>
+    <string name="st_flag">🇸🇹</string>
+    <string name="sz_flag">🇸🇿</string>
+    <string name="td_flag">🇹🇩</string>
+    <string name="tg_flag">🇹🇬</string>
+    <string name="tn_flag">🇹🇳</string>
+    <string name="tz_flag">🇹🇿</string>
+    <string name="ug_flag">🇺🇬</string>
+    <string name="yt_flag">🇾🇹</string>
+    <string name="za_flag">🇿🇦</string>
+    <string name="zm_flag">🇿🇲</string>
+    <string name="zw_flag">🇿🇼</string>
+    <string name="title_activity_attempts_report">AttemptsReportActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
 
 
-    <!-- String cd_flag = "\uD83C\uDDE8\uD83C\uDDE9";
-     countryEmoji.add(cd_flag);
-     String cf_flag = "\uD83C\uDDE8\uD83C\uDDEB";
-     countryEmoji.add(cf_flag);
-     String cg_flag = "\uD83C\uDDE8\uD83C\uDDEC";
-     countryEmoji.add(cg_flag);
-     String ci_flag = "\uD83C\uDDE8\uD83C\uDDEE";
-     countryEmoji.add(ci_flag);
-     String cm_flag = "\uD83C\uDDE8\uD83C\uDDF2";
-     countryEmoji.add(cm_flag);
-     String cv_flag = "\uD83C\uDDE8\uD83C\uDDFB";
-     countryEmoji.add(cv_flag);
-     String dj_flag = "\uD83C\uDDE9\uD83C\uDDEF";
-     countryEmoji.add(dj_flag);
-     String dz_flag = "\uD83C\uDDE9\uD83C\uDDFF";
-     countryEmoji.add(dz_flag);
-     String eg_flag = "\uD83C\uDDEA\uD83C\uDDEC";
-     countryEmoji.add(eg_flag);
-     String eh_flag = "\uD83C\uDDEA\uD83C\uDDED";
-     countryEmoji.add(eh_flag);
-     String er_flag = "\uD83C\uDDEA\uD83C\uDDF7";
-     countryEmoji.add(er_flag);
-     String et_flag = "\uD83C\uDDEA\uD83C\uDDF9";
-     countryEmoji.add(et_flag);
-     String ga_flag = "\uD83C\uDDEC\uD83C\uDDE6";
-     countryEmoji.add(ga_flag);
-     String gh_flag = "\uD83C\uDDEC\uD83C\uDDED";
-     countryEmoji.add(gh_flag);
-     String gm_flag = "\uD83C\uDDEC\uD83C\uDDF2";-->
+
+
+
+
+
+
+
+
+
 
  </resources>

@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.countryquizapp.Model.Country;
 import com.example.countryquizapp.Model.CountryDetails;
 import com.example.countryquizapp.R;
 
@@ -24,7 +23,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
 
 
     public interface ListClickListener{
-        void onCountrySelected(CountryDetails seletedCountry);}
+        void onCountrySelected(CountryDetails selectedCountry);}
 
     public ListClickListener listener;
     // inner class

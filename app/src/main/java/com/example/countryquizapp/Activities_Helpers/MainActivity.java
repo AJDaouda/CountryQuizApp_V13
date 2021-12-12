@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.countryquizapp.Model.Country;
 import com.example.countryquizapp.Model.CountryDetails;
 import com.example.countryquizapp.Model.myApp;
 import com.example.countryquizapp.R;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
 
     ArrayList<CountryDetails> countrydata = new ArrayList<CountryDetails>(0);
     ArrayList<CountryDetails> countrydata1 = new ArrayList<CountryDetails>(0);
-    //ArrayList<CountryDetails> countrydataWithEmojiFlag = new ArrayList<CountryDetails>(0);
+    //ArrayList<CountryDetails> countriesWithEmojiFlag = new ArrayList<CountryDetails>(0);
 
     ArrayList<String> countryEmoji1 = new ArrayList<String>(0);
 
@@ -57,40 +56,32 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
     }
 
 
-
     @Override
     public void APINetworkListenerForCountryData(String jsonString) {
         // System.out.println(jsonString);
         Log.d("country details", jsonString);// not parsed yet.
         countrydata = jsonService.parseCountriesFromJsonAPIData(jsonString);
-        Log.d("Printin my data", countrydata.get(0).getCountryName() + " " + countrydata.get(1).getCountryName()+ " " +countrydata.get(2).getCountryName());
+        Log.d("Printing my data", countrydata.get(0).getCountryName() + " " + countrydata.get(1).getCountryName()+ " " +countrydata.get(2).getCountryName());
         Log.d("Printing", countrydata.get(0).getCode() + " " +
                 countrydata.get(0).getCountryName()+ " " +countrydata.get(0).getCapitalCity() +
                 " " +countrydata.get(0).getPopulation() + " " +countrydata.get(0).getCountryCurrencyCode());
 
         System.out.println("****************************THis is my data :" + countrydata.toString()+" ");
-        countrydata1.add(countrydata.get(0));
-        countrydata1.add(countrydata.get(1));
-        countrydata1.add(countrydata.get(2));
-        countrydata1.add(countrydata.get(3));
+        createdata1();
         createCountryEmoji();
         createCountriesWithFlag();
+        System.out.println("****************************THis is my data :" + countrydata1.toString()+" ");
         adapter.allCountriesList = countrydata1;
-        adapter.notifyDataSetChanged();
-    }
+        adapter.notifyDataSetChanged(); }
 
 
     @Override
-    public void APINetworkingListerForImage(Bitmap image) {
-    }
-
-    @Override
-    public void onCountrySelected(CountryDetails seletedCountry) {
-        String countryCode = seletedCountry.getCode().toString().toLowerCase();
+    public void onCountrySelected(CountryDetails selectedCountry) {
+        String countryCode = selectedCountry.getCode().toString().toLowerCase();
         Intent toQuizActivity = new Intent(this, QuizActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable("Selected country details",seletedCountry);
-        System.out.println("I am sending: \n"+ seletedCountry.toString());
+        bundle.putParcelable("Selected country details",selectedCountry);
+        System.out.println("I am sending: \n"+ selectedCountry.toString());
         bundle.putParcelableArrayList("listOfCountriesDetails",countrydata);
         System.out.println("I am sending: \n"+ countrydata.toString());
         toQuizActivity.putExtras(bundle);
@@ -99,10 +90,15 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
         // System.out.println("My history details are: \n"+ selectedHistory.toString());
         Toast.makeText(this, "Country flag being sent", Toast.LENGTH_SHORT).show(); }
 
+    private void createdata1(){
+       for (int i=0;i<countrydata.size();i++){
+           countrydata1.add(countrydata.get(i)); }
+    }
+
+
     private void createCountriesWithFlag(){
-        for (int i=0;i<=countrydata1.size();i++){
-            countrydata.get(i).setCountryName(countrydata.get(i).getCountryName() + "    "+countryEmoji1.get(i));
-        }
+        for (int i=0;i<countrydata1.size();i++){
+        countrydata1.get(i).setCountryName(countrydata1.get(i).getCountryName() + "   "+countryEmoji1.get(i)); }
     }
 
     private void createCountryEmoji(){
@@ -110,54 +106,64 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
         countryEmoji1.add(getResources().getString(R.string.bf_flag));
         countryEmoji1.add(getResources().getString(R.string.bi_flag));
         countryEmoji1.add(getResources().getString(R.string.bj_flag));
+        countryEmoji1.add(getResources().getString(R.string.bw_flag));
         countryEmoji1.add(getResources().getString(R.string.cd_flag));
-    }
+        countryEmoji1.add(getResources().getString(R.string.cf_flag));
+        countryEmoji1.add(getResources().getString(R.string.cg_flag));
+        countryEmoji1.add(getResources().getString(R.string.ci_flag));
+        countryEmoji1.add(getResources().getString(R.string.cm_flag));
+        countryEmoji1.add(getResources().getString(R.string.cv_flag));
+        countryEmoji1.add(getResources().getString(R.string.dj_flag));
+        countryEmoji1.add(getResources().getString(R.string.dz_flag));
+        countryEmoji1.add(getResources().getString(R.string.eg_flag));
+        countryEmoji1.add(getResources().getString(R.string.eh_flag));
+        countryEmoji1.add(getResources().getString(R.string.er_flag));
+        countryEmoji1.add(getResources().getString(R.string.et_flag));
+        countryEmoji1.add(getResources().getString(R.string.ga_flag));
+        countryEmoji1.add(getResources().getString(R.string.gh_flag));
+        countryEmoji1.add(getResources().getString(R.string.gm_flag));
+        countryEmoji1.add(getResources().getString(R.string.gn_flag));
+        countryEmoji1.add(getResources().getString(R.string.gq_flag));
+        countryEmoji1.add(getResources().getString(R.string.gw_flag));
+        countryEmoji1.add(getResources().getString(R.string.ke_flag));
+        countryEmoji1.add(getResources().getString(R.string.km_flag));
+        countryEmoji1.add(getResources().getString(R.string.lr_flag));
+        countryEmoji1.add(getResources().getString(R.string.ls_flag));
+        countryEmoji1.add(getResources().getString(R.string.ly_flag));
+        countryEmoji1.add(getResources().getString(R.string.ma_flag));
+        countryEmoji1.add(getResources().getString(R.string.mg_flag));
+        countryEmoji1.add(getResources().getString(R.string.ml_flag));
+        countryEmoji1.add(getResources().getString(R.string.mr_flag));
+        countryEmoji1.add(getResources().getString(R.string.mu_flag));
+        countryEmoji1.add(getResources().getString(R.string.mw_flag));
+        countryEmoji1.add(getResources().getString(R.string.mz_flag));
+        countryEmoji1.add(getResources().getString(R.string.na_flag));
+        countryEmoji1.add(getResources().getString(R.string.ne_flag));
+        countryEmoji1.add(getResources().getString(R.string.ng_flag));
+        countryEmoji1.add(getResources().getString(R.string.re_flag));
+        countryEmoji1.add(getResources().getString(R.string.rw_flag));
+        countryEmoji1.add(getResources().getString(R.string.sc_flag));
+        countryEmoji1.add(getResources().getString(R.string.sd_flag));
+        countryEmoji1.add(getResources().getString(R.string.sh_flag));
+        countryEmoji1.add(getResources().getString(R.string.sl_flag));
+        countryEmoji1.add(getResources().getString(R.string.sn_flag));
+        countryEmoji1.add(getResources().getString(R.string.so_flag));
+        countryEmoji1.add(getResources().getString(R.string.ss_flag));
+        countryEmoji1.add(getResources().getString(R.string.st_flag));
+        countryEmoji1.add(getResources().getString(R.string.sz_flag));
+        countryEmoji1.add(getResources().getString(R.string.td_flag));
+        countryEmoji1.add(getResources().getString(R.string.tg_flag));
+        countryEmoji1.add(getResources().getString(R.string.tn_flag));
+        countryEmoji1.add(getResources().getString(R.string.tz_flag));
+        countryEmoji1.add(getResources().getString(R.string.ug_flag));
+        countryEmoji1.add(getResources().getString(R.string.yt_flag));
+        countryEmoji1.add(getResources().getString(R.string.za_flag));
+        countryEmoji1.add(getResources().getString(R.string.zm_flag));
+        countryEmoji1.add(getResources().getString(R.string.zw_flag)); }
 
+    @Override
+    public void APINetworkingListerForImage(Bitmap image) { }
 }
 
-/*private void createCountriesEmoji(){
-
-
-        String ao_flag = "\uD83C\uDDE6\uD83C\uDDF4";
-        countryEmoji.add(ao_flag);
-        String bf_flag = "\uD83C\uDDE7\uD83C\uDDEB";
-        countryEmoji.add(bf_flag);
-        String bi_flag = "\uD83C\uDDE7\uD83C\uDDEE";
-        countryEmoji.add(bi_flag);
-        String bj_flag = "\uD83C\uDDE7\uD83C\uDDEF";
-        countryEmoji.add(bj_flag);
-        String bw_flag = "\uD83C\uDDE7\uD83C\uDDFC";
-        countryEmoji.add(bw_flag);
-        String cd_flag = "\uD83C\uDDE8\uD83C\uDDE9";
-        countryEmoji.add(cd_flag);
-        String cf_flag = "\uD83C\uDDE8\uD83C\uDDEB";
-        countryEmoji.add(cf_flag);
-        String cg_flag = "\uD83C\uDDE8\uD83C\uDDEC";
-        countryEmoji.add(cg_flag);
-        String ci_flag = "\uD83C\uDDE8\uD83C\uDDEE";
-        countryEmoji.add(ci_flag);
-        String cm_flag = "\uD83C\uDDE8\uD83C\uDDF2";
-        countryEmoji.add(cm_flag);
-        String cv_flag = "\uD83C\uDDE8\uD83C\uDDFB";
-        countryEmoji.add(cv_flag);
-        String dj_flag = "\uD83C\uDDE9\uD83C\uDDEF";
-        countryEmoji.add(dj_flag);
-        String dz_flag = "\uD83C\uDDE9\uD83C\uDDFF";
-        countryEmoji.add(dz_flag);
-        String eg_flag = "\uD83C\uDDEA\uD83C\uDDEC";
-        countryEmoji.add(eg_flag);
-        String eh_flag = "\uD83C\uDDEA\uD83C\uDDED";
-        countryEmoji.add(eh_flag);
-        String er_flag = "\uD83C\uDDEA\uD83C\uDDF7";
-        countryEmoji.add(er_flag);
-        String et_flag = "\uD83C\uDDEA\uD83C\uDDF9";
-        countryEmoji.add(et_flag);
-        String ga_flag = "\uD83C\uDDEC\uD83C\uDDE6";
-        countryEmoji.add(ga_flag);
-        String gh_flag = "\uD83C\uDDEC\uD83C\uDDED";
-        countryEmoji.add(gh_flag);
-        String gm_flag = "\uD83C\uDDEC\uD83C\uDDF2";
-        countryEmoji.add(gm_flag);
-    }*/
 
 

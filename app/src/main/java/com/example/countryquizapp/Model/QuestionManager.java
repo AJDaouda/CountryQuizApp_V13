@@ -9,4 +9,5 @@ public class QuestionManager {
     public QuestionManager(ArrayList<QuizQuestion> questionBank) {this.questionBank = questionBank;}
 
     public ArrayList<QuizQuestion> getQuestionBank() {return questionBank;}
+    public void setQuestionBank(ArrayList<QuizQuestion> questionBank) {this.questionBank = questionBank;}
 }

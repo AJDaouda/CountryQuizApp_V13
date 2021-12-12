@@ -13,15 +13,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CountryQuizApp">
-
         <activity
             android:name=".Activities_Helpers.QuizActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.countryquizapp.CountryListActivity" />
+                android:value="com.example.countryquizapp.Activities_Helpers.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".Activities_Helpers.AttemptsReportActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.countryquizapp.Activities_Helpers.MainActivity" />
+        </activity>
         <activity
             android:name=".Activities_Helpers.MainActivity"
             android:exported="true">

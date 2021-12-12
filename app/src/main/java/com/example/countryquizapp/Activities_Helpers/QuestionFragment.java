@@ -19,7 +19,7 @@ import com.example.countryquizapp.R;
 public class QuestionFragment extends Fragment {
 
     // TODO: Rename and change types and number of parameters
-    public static QuestionFragment newInstance(String  question, String[] potentialAnswers) {
+    public static QuestionFragment newInstance(String  question) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
         //args.putInt("QuestonId", qId);
