@@ -37,12 +37,39 @@ public class AttemptsReportActivity extends AppCompatActivity implements Databas
         listOfAttempts = (ListView) findViewById(R.id.list_of_attempts);
         numOfAttempts = (TextView) findViewById(R.id.num_of_attempts);
         dbManager.listener = this;
-        dbManager.getAllAttempts();
+
+        if(!(this.getIntent().getParcelableArrayListExtra("All attempts")==null)){
+            attemptListFromDB = this.getIntent().getParcelableArrayListExtra("All attempts");
+            System.out.println("My saved attempts is: \n"+ attemptListFromDB.toString());}
+        else {
+            dbManager.getAllAttempts();
+            //attemptListFromDB = this.getIntent().getParcelableArrayListExtra("All attempts");
+            System.out.println("My saved attempts is: \n"+ attemptListFromDB);}
+       // dbManager.getAllAttempts();
 
         /*
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.onChildViewAttachedToWindow(listOfAttempts);*/
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this,"QuizReport started",Toast.LENGTH_SHORT).show();
+        dbManager = ((myApp)getApplication()).getdbManager();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(this,"QuizReport restarted",Toast.LENGTH_SHORT).show();
+        dbManager = ((myApp)getApplication()).getdbManager();
+    }
+
+    protected void onResume() {
+        super.onResume();
+        dbManager = ((myApp)getApplication()).getdbManager();
     }
 
     @Override
@@ -84,21 +111,10 @@ public class AttemptsReportActivity extends AppCompatActivity implements Databas
     };
 */
 
-
-
-   /* @Override
-    protected void onResume() {
-        super.onResume();
-        dbManager = ((myApp)getApplication()).getdbManager();
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("All attempts", attemptListFromDB);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }*/
 }

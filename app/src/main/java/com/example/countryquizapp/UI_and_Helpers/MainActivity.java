@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
 
 
     private void createCountriesWithFlag(){
-        // for (int i=0;i<=countrydata.size()-1;i++){
-       for (int i=0;i<countrydata1.size();i++){
+        for (int i=0;i<=countrydata.size()-1;i++){
+      // for (int i=0;i<countrydata1.size();i++){
         countrydata1.get(i).setCountryName(countrydata1.get(i).getCountryName() + "   "+countryEmoji1.get(i)); }
     }
 
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
     }
 
     private void toAttemptsReport(){
-        Intent toAttemptsReport = new Intent(getApplicationContext(),TestActivity.class);
+        Intent toAttemptsReport = new Intent(getApplicationContext(),AttemptsReportActivity.class);
         startActivity(toAttemptsReport); }
     @Override
     public void APINetworkingListerForImage(Bitmap image) { }

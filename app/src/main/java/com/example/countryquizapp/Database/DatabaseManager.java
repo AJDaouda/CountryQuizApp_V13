@@ -8,11 +8,13 @@ import androidx.room.Room;
 
 import com.example.countryquizapp.Model.Attempt;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DatabaseManager {
+    List<Attempt> list;
     static AttemptDatabase db;
     ExecutorService databaseExecutor = Executors.newFixedThreadPool(4);
     Handler db_handler = new Handler(Looper.getMainLooper());
@@ -42,7 +44,8 @@ public class DatabaseManager {
         });
     }
 
-    public void getAllAttempts(){
+    public List<Attempt> getAllAttempts(){
+        //public void getAllAttempts(){
         databaseExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -56,7 +59,7 @@ public class DatabaseManager {
 
             }
         });
-
+return list;
     }
 
 

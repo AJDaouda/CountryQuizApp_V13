@@ -6,6 +6,7 @@ import androidx.room.Query;
 
 import com.example.countryquizapp.Model.Attempt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
