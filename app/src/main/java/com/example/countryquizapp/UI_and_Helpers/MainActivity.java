@@ -1,11 +1,15 @@
-package com.example.countryquizapp.Activities_Helpers;
+package com.example.countryquizapp.UI_and_Helpers;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -91,13 +95,14 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
         Toast.makeText(this, "Country flag being sent", Toast.LENGTH_SHORT).show(); }
 
     private void createdata1(){
-       for (int i=0;i<countrydata.size();i++){
+       for (int i=0;i<=countrydata.size()-1;i++){
            countrydata1.add(countrydata.get(i)); }
     }
 
 
     private void createCountriesWithFlag(){
-        for (int i=0;i<countrydata1.size();i++){
+        // for (int i=0;i<=countrydata.size()-1;i++){
+       for (int i=0;i<countrydata1.size();i++){
         countrydata1.get(i).setCountryName(countrydata1.get(i).getCountryName() + "   "+countryEmoji1.get(i)); }
     }
 
@@ -161,6 +166,30 @@ public class MainActivity extends AppCompatActivity implements NetworkService.Ne
         countryEmoji1.add(getResources().getString(R.string.zm_flag));
         countryEmoji1.add(getResources().getString(R.string.zw_flag)); }
 
+    // Showing the "top side menu" in the main activity
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mInflater = getMenuInflater();
+        mInflater.inflate(R.menu.top_side_menu, menu);
+        return true;}
+
+    // Required actions when a menu item is selected
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.menu_item_1:
+                toAttemptsReport();
+                Toast.makeText(this,"Quiz Report clicked",Toast.LENGTH_SHORT).show();
+
+                break;
+        }
+        return true;
+    }
+
+    private void toAttemptsReport(){
+        Intent toAttemptsReport = new Intent(getApplicationContext(),TestActivity.class);
+        startActivity(toAttemptsReport); }
     @Override
     public void APINetworkingListerForImage(Bitmap image) { }
 }

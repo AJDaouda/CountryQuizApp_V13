@@ -14,21 +14,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CountryQuizApp">
         <activity
-            android:name=".Activities_Helpers.QuizActivity"
+            android:name=".UI_and_Helpers.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI_and_Helpers.QuizActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.countryquizapp.Activities_Helpers.MainActivity" />
+                android:value="com.example.countryquizapp.UI_and_Helpers.MainActivity" />
         </activity>
         <activity
-            android:name=".Activities_Helpers.AttemptsReportActivity"
+            android:name=".UI_and_Helpers.AttemptsReportActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.countryquizapp.Activities_Helpers.MainActivity" />
+                android:value="com.example.countryquizapp.UI_and_Helpers.QuizActivity" />
         </activity>
         <activity
-            android:name=".Activities_Helpers.MainActivity"
+            android:name=".UI_and_Helpers.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities_Helpers.QuizActivity">
+    tools:context=".UI_and_Helpers.QuizActivity">
 
     <ImageView
         android:id="@+id/quiz_flag_image"

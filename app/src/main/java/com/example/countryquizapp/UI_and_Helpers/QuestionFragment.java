@@ -1,4 +1,4 @@
-package com.example.countryquizapp.Activities_Helpers;
+package com.example.countryquizapp.UI_and_Helpers;
 
 import android.os.Bundle;
 

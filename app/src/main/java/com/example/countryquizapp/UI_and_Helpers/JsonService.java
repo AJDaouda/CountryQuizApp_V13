@@ -1,4 +1,4 @@
-package com.example.countryquizapp.Activities_Helpers;
+package com.example.countryquizapp.UI_and_Helpers;
 
 import com.example.countryquizapp.Model.CountryDetails;
 
@@ -18,7 +18,7 @@ public class JsonService {
             JSONObject jsonObject = new JSONObject(jsonStringfromAPI);// root data
             JSONObject countriesObj =  jsonObject.getJSONObject("countries");
             JSONArray countryData = countriesObj.getJSONArray("country");
-            for (int i = 0 ; i<= countryData.length(); i++) {
+            for (int i = 0 ; i<= countryData.length()-1; i++) {
                 JSONObject country = countryData.getJSONObject(i);
                 String continentName = country.getString("continentName");
                 if (continentName.equals("Africa")) {

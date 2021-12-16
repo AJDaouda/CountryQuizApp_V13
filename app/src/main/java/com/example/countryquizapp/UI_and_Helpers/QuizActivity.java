@@ -1,12 +1,12 @@
-package com.example.countryquizapp.Activities_Helpers;
+package com.example.countryquizapp.UI_and_Helpers;
+
+import static com.example.countryquizapp.Database.DatabaseManager.getDBInstance;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -16,6 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.example.countryquizapp.Database.AttemptDatabase;
+import com.example.countryquizapp.Database.DatabaseManager;
+import com.example.countryquizapp.Model.Attempt;
 import com.example.countryquizapp.Model.CountryDetails;
 import com.example.countryquizapp.Model.QuestionManager;
 import com.example.countryquizapp.Model.QuizQuestion;
@@ -28,6 +32,8 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
     FragmentManager fm = getSupportFragmentManager();
     NetworkService networkingService;
     QuestionManager qManager;
+    DatabaseManager dbManager;
+    AttemptDatabase db;
     AlertDialog.Builder builder;
 
     //Instance variables
@@ -40,32 +46,35 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
 
     String countryCode;
     String countryName;
-    /*String[] countryCodePotentialAns;
-    String[] countryCodePotentialAns;
-    String[] countryCodePotentialAns;
-    String[] countryCodePotentialAns;*/
+    String playerChoice;
+
     CountryDetails selectedCountry;
     ArrayList<CountryDetails> countriesDetails = new ArrayList<CountryDetails>(0);
+
     QuizQuestion countryCodeQuiz;
     QuizQuestion currencyCodeQuiz;
     QuizQuestion populationQuiz;
     QuizQuestion capitalCityQuiz;
     ArrayList<QuizQuestion> selectedCountryQuestionBank;
-    String playerChoice;
+
+    Attempt currentAttempt;
+
 
     //Layout Widgets declaration
     ImageView flagImage;
     RadioButton ans_1,ans_2,ans_3;
     ProgressBar myProgress;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
+        networkingService = ((myApp)getApplication()).getNetworkingService();
+        qManager = ((myApp)getApplication()).getqManager();
+        dbManager =  ((myApp)getApplication()).getdbManager();
+        db = dbManager.getDBInstance(this);
+
 
         flagImage = (ImageView) findViewById(R.id.quiz_flag_image);
         ans_1 = (RadioButton) findViewById(R.id.Answer_1);
@@ -74,9 +83,6 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
         myProgress =  (ProgressBar) findViewById(R.id.pbar);
         builder = new AlertDialog.Builder(this);
         //myProgress.setMax(progressMaxValue);
-
-        networkingService = ((myApp)getApplication()).getNetworkingService();
-        qManager = ((myApp)getApplication()).getqManager();
 
         //Getting country code to fetch country flag
         Intent fromCountryListActivity = getIntent();
@@ -123,9 +129,12 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
             System.out.println("my list is: " + qManager.getQuestionBank().get(index).getQuestion());
         }
         else{
+            index =0;
             updateFragment(qManager.getQuestionBank().get(index).getQuestion());
-            System.out.println("Something went wrong");}
+           // System.out.println("Something went wrong");
             updatePotentialAns();
+        }
+
 
        /* String potentialAns1 =qManager.getQuestionBank().get(index).getPotentialAnswers()[0];
         String potentialAns2 =qManager.getQuestionBank().get(index).getPotentialAnswers()[1];
@@ -150,10 +159,12 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
         flagImage.setImageBitmap(image);}
 
     private int[] getPotentialAnsArray(){
-        randomNum1 = (int)Math.floor(Math.random()*(countriesDetails.size()));
-        randomNum2 = (int)Math.floor(Math.random()*(countriesDetails.size()));
-        randomNumArray[0]=randomNum1;
-        randomNumArray[1]=randomNum2;
+        while((countriesDetails.indexOf(selectedCountry) != randomNum1)&&(countriesDetails.indexOf(selectedCountry) != randomNum2)){
+            randomNum1 = (int)Math.floor(Math.random()*(countriesDetails.size()));
+            randomNum2 = (int)Math.floor(Math.random()*(countriesDetails.size()));
+            randomNumArray[0]=randomNum1;
+            randomNumArray[1]=randomNum2;
+            break; }
         return randomNumArray;}
 
     private void createQBankForSelectedCountry(){
@@ -171,36 +182,50 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
             String countryCodeCorrectAns = selectedCountry.getCode();
             String[] countryCodePotentialAns ;
             getPotentialAnsArray();
-            countryCodePotentialAns= new String[]{selectedCountry.getCode(), countriesDetails.get(randomNumArray[0]).getCode(),
-            countriesDetails.get(randomNumArray[1]).getCode()};
-            countryCodeQuiz = new QuizQuestion(countryCodeQ,countryCodeCorrectAns,countryCodePotentialAns); }
+            if ((countriesDetails.get(randomNumArray[0]).getCode()!=selectedCountry.getCode())&&
+                    (countriesDetails.get(randomNumArray[1]).getCode()!=selectedCountry.getCode())){
+                countryCodePotentialAns= new String[]{selectedCountry.getCode(), countriesDetails.get(randomNumArray[0]).getCode(),
+                        countriesDetails.get(randomNumArray[1]).getCode()};
+                countryCodeQuiz = new QuizQuestion(countryCodeQ,countryCodeCorrectAns,countryCodePotentialAns);  }
+        }
 
         private void createCurrencyCodeQuiz(){
             String currencyCodeQ = "What is the currency code of "+countryName+"?";
             String currencyCodeCorrectAns = selectedCountry.getCountryCurrencyCode();
             String[] currencyCodePotentialAns ;
             getPotentialAnsArray();
-            currencyCodePotentialAns= new String[]{countriesDetails.get(randomNumArray[0]).getCountryCurrencyCode(),selectedCountry.getCountryCurrencyCode(),
-                    countriesDetails.get(randomNumArray[1]).getCountryCurrencyCode()};
-            currencyCodeQuiz = new QuizQuestion(currencyCodeQ,currencyCodeCorrectAns,currencyCodePotentialAns);}
+            while ((countriesDetails.get(randomNumArray[0]).getCountryCurrencyCode()!=selectedCountry.getCountryCurrencyCode())&&
+                    (countriesDetails.get(randomNumArray[1]).getCountryCurrencyCode()!=selectedCountry.getCountryCurrencyCode())){
+                currencyCodePotentialAns= new String[]{countriesDetails.get(randomNumArray[0]).getCountryCurrencyCode(),selectedCountry.getCountryCurrencyCode(),
+                        countriesDetails.get(randomNumArray[1]).getCountryCurrencyCode()};
+                currencyCodeQuiz = new QuizQuestion(currencyCodeQ,currencyCodeCorrectAns,currencyCodePotentialAns);
+            break;}
+            }
 
         private void createPopulationQuiz(){
             String populationQ = "What is the population number of "+countryName+"?";
-            String populationCorrectAns = selectedCountry.getPopulation();
+            String populationCorrectAns = selectedCountry.getPopulation()+" people";
             String[] populationPotentialAns ;
             getPotentialAnsArray();
-            populationPotentialAns= new String[]{countriesDetails.get(randomNumArray[0]).getPopulation() +" people",
-            countriesDetails.get(randomNumArray[1]).getPopulation()+" people",selectedCountry.getPopulation()+" people"};
-            populationQuiz = new QuizQuestion(populationQ,populationCorrectAns,populationPotentialAns);}
+            if ((countriesDetails.get(randomNumArray[0]).getPopulation()!=selectedCountry.getPopulation())&&
+                    (countriesDetails.get(randomNumArray[1]).getPopulation()!=selectedCountry.getPopulation())){
+                populationPotentialAns= new String[]{countriesDetails.get(randomNumArray[0]).getPopulation() +" people",
+                        countriesDetails.get(randomNumArray[1]).getPopulation()+" people",selectedCountry.getPopulation()+" people"};
+                populationQuiz = new QuizQuestion(populationQ,populationCorrectAns,populationPotentialAns); }
+            }
 
         private void createCapitalCityQuiz(){
             String capitalCityQ = "What is the capital city of "+countryName+"?";
             String capitalCityCorrectAns = selectedCountry.getCapitalCity();
             String[] capitalCityPotentialAns ;
             getPotentialAnsArray();
-            capitalCityPotentialAns= new String[]{ countriesDetails.get(randomNumArray[0]).getCapitalCity(),selectedCountry.getCapitalCity(),
-            countriesDetails.get(randomNumArray[1]).getCapitalCity()};
-            capitalCityQuiz = new QuizQuestion(capitalCityQ,capitalCityCorrectAns,capitalCityPotentialAns);}
+            if ((countriesDetails.get(randomNumArray[0]).getCapitalCity()!=selectedCountry.getCapitalCity())&&
+                    (countriesDetails.get(randomNumArray[1]).getCapitalCity()!=selectedCountry.getCapitalCity())){
+                capitalCityPotentialAns= new String[]{ countriesDetails.get(randomNumArray[0]).getCapitalCity(),selectedCountry.getCapitalCity(),
+                        countriesDetails.get(randomNumArray[1]).getCapitalCity()};
+                capitalCityQuiz = new QuizQuestion(capitalCityQ,capitalCityCorrectAns,capitalCityPotentialAns); }
+
+            }
 
     private void updatePotentialAns(){
         String potentialAns1 =qManager.getQuestionBank().get(index).getPotentialAnswers()[0];
@@ -216,7 +241,8 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
        ans_3.setChecked(false); }
 
     private void getAnswer(){
-        if (playerChoice != qManager.getQuestionBank().get(index).getCorrectAnswer()){
+        //if (playerChoice != (qManager.getQuestionBank().get(index).getCorrectAnswer())){
+        if (!playerChoice.equals(qManager.getQuestionBank().get(index).getCorrectAnswer())){
             System.out.println("The user's answer is: "+ playerChoice);
             System.out.println("The correct answer is: "+ qManager.getQuestionBank().get(index).getCorrectAnswer().toString());
             Toast.makeText(this,"Incorrect answer",Toast.LENGTH_SHORT).show();}
@@ -240,64 +266,35 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
             case R.id.Answer_1:
             case R.id.Answer_2:
             case R.id.Answer_3:
-                if (index==qManager.getQuestionBank().size()-1){
-                    if (checked)
+                if(index==3 && checked){
                     getAnswer();
                     myProgress.setProgress(progressMaxValue);
                     showNextOption();
+                    System.out.println("Your current index is: "+ index);
                     System.out.println("The number of correct answer is: "+ correctAnswers +
-                            ", and you have accumulated "+points);
-                    //resetRadioBtn();
+                            ", and you have accumulated "+points+ " points");
+                }
+                else if (index<3){
+                   // if (checked){
+                        System.out.println("Your current index is: "+ index);
+                        //playerChoice = ((RadioButton) view).getText().toString();
+                        getAnswer();
+                        index++;
+                        resetRadioBtn();
+                        updateFragment(qManager.getQuestionBank().get(index).getQuestion());
+                        myProgress.setProgress(index);
+                        updatePotentialAns();
+                    System.out.println("The number of correct answer is: "+ correctAnswers +
+                            ", and you have accumulated "+points+ " points");
+                       // }
                 }
                 else{
-                    if (checked)
-                    getAnswer();
-                    index++;
-                    updateFragment(qManager.getQuestionBank().get(index).getQuestion());
-                    myProgress.setProgress(index);
-                    resetRadioBtn();
-                    updatePotentialAns();
+                    System.out.println("We are qt index>3 ");
                 }
-
                 break;}
+
     }
 
-    /*public void onRadioButtonClicked(View view) {
-        //playerChoice = String.valueOf((RadioButton)view.get)
-        // Is the button now checked?
-
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        //showNextOption();
-        switch(view.getId()) {
-            case R.id.Answer_1:
-            case R.id.Answer_2:
-            case R.id.Answer_3:
-                if (index==qManager.getQuestionBank().size()-1){
-                    if (checked){
-                        playerChoice = ((RadioButton) view).getText().toString(); }
-                        getAnswer();
-                        myProgress.setProgress(progressMaxValue);
-                        showNextOption();
-                        System.out.println("The number of correct answer is: "+ correctAnswers +
-                                ", and you have accumulated "+points);
-                        //resetRadioBtn();
-                    }
-                else{
-                    if (checked){
-                        playerChoice = ((RadioButton) view).getText().toString();
-                    }
-                    getAnswer();
-                    index++;
-                    updateFragment(qManager.getQuestionBank().get(index).getQuestion());
-                    myProgress.setProgress(index);
-                    resetRadioBtn();
-                    updatePotentialAns();
-                    }
-
-                    break;}
-        }*/
 
     private void showNextOption(){
         builder.setTitle(getResources().getString(R.string.nextStep_text));
@@ -306,8 +303,13 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
         builder.setPositiveButton(getResources().getString(R.string.btn_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                currentAttempt=new Attempt(countryName,correctAnswers,points);
+                //db.getAttemptDAO().insertAttempt(currentAttempt);
+                dbManager.insertNewAttempt(currentAttempt);
+                System.out.println("Your current attempt is: "+ currentAttempt);
                 Toast.makeText(getApplicationContext(),"SAVE clicked",Toast.LENGTH_SHORT).show();
-                toAttemptsActivity();
+                toAttemptsReport();
+                index=0;
                 //Create intent to next activity + save to db
                 //Attempt #1(autogenerated num from db)
                 //CountryName
@@ -321,6 +323,7 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(),"IGNORE clicked",Toast.LENGTH_SHORT).show();
+                index=0;
                 BackToMainActivity(); }
         });
         AlertDialog alertDialog=builder.create();
@@ -329,13 +332,16 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
     }
 
     private void BackToMainActivity(){
-        Intent backToMain = new Intent(this,MainActivity.class);
-        startActivity(backToMain); }
+       // Intent backToMain = new Intent(this,MainActivity.class);
+        Intent backToMain = new Intent(QuizActivity.this,MainActivity.class);
+        startActivity(backToMain);
+        Toast.makeText(getApplicationContext(),"finished",Toast.LENGTH_SHORT).show();
 
-    private void toAttemptsActivity(){
+    }
+
+    private void toAttemptsReport(){
         Intent toAttemptsReport = new Intent(this,AttemptsReportActivity.class);
         startActivity(toAttemptsReport); }
-
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
