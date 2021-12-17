@@ -38,7 +38,7 @@ public class AttemptsReportActivity extends AppCompatActivity implements Databas
         AttemptsRecyclerView = (RecyclerView) findViewById(R.id.list_of_attempts);
         numOfAttempts = (TextView) findViewById(R.id.num_of_attempts);
         AttemptsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AttemptListAdapter(attemptListFromDB, this);
+        adapter = new AttemptListAdapter(this,attemptListFromDB);
         AttemptsRecyclerView.setAdapter(adapter);
         adapter.listener = this;
 
@@ -71,7 +71,7 @@ public class AttemptsReportActivity extends AppCompatActivity implements Databas
        // adapter = new AttemptReportAdapter(attemptListFromDB, this);
         //AttemptsRecyclerView.setAdapter(adapter);
         numOfAttempts.setText("The number of attempts is " + attemptListFromDB.size());
-        adapter.listOfAttempts = attemptListFromDB;
+        adapter.allAttemptList = attemptListFromDB;
         adapter.notifyDataSetChanged();
     }
 
@@ -133,8 +133,9 @@ public class AttemptsReportActivity extends AppCompatActivity implements Databas
         System.out.println("my outstate array is: "+ attemptListFromDB.toString());
     }
 
+
     @Override
-    public void onAttemptSelected(Attempt selectedAttempt) {
+    public void onAttemptClicked(Attempt clickedAttempt) {
 
     }
 }

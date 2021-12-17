@@ -10,10 +10,70 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.countryquizapp.Model.Attempt;
+import com.example.countryquizapp.Model.CountryDetails;
 import com.example.countryquizapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
+public class AttemptListAdapter extends RecyclerView.Adapter<AttemptListAdapter.viewHolder> {
+
+    Context aContext;
+    List<Attempt> allAttemptList;
+
+    public AttemptListAdapter(Context c, List<Attempt> list) {
+        aContext = c;
+        allAttemptList = list; }
+
+
+    public interface ListClickListener{
+        void onAttemptClicked(Attempt clickedAttempt);}
+
+    public ListClickListener listener;
+    // inner class
+    // View Holder = Row in the table
+    // static = able to access it from the class without creating object
+    public static class viewHolder extends RecyclerView.ViewHolder{
+        private final TextView aName;
+        private final TextView aAns;
+        private final TextView aPoint;
+
+        public viewHolder(@NonNull View itemView) {
+            super(itemView);
+            aName=itemView.findViewById(R.id.attempt);
+            aAns=itemView.findViewById(R.id.correctAns);
+            aPoint=itemView.findViewById(R.id.point);
+        }
+
+        public TextView getaName() {return aName;}
+        public TextView getaAns() {return aAns;}
+        public TextView getaPoint() {return aPoint;}
+    }
+
+    @NonNull
+    @Override
+    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(aContext).inflate(R.layout.activity_attempts_report,parent,false);
+        return new viewHolder(view); }
+
+    @Override
+    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+        holder.getaName().setText(allAttemptList.get(position).getName());
+        holder.getaAns().setText(allAttemptList.get(position).getCorrectAnswer());
+        holder.getaPoint().setText(allAttemptList.get(position).getPoints());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onAttemptClicked(allAttemptList.get(position));
+            }
+        });
+    }
+
+
+    @Override
+    public int getItemCount() {return allAttemptList.size(); }
+}
+/*
 public class AttemptListAdapter extends RecyclerView.Adapter<AttemptListAdapter.viewHolder>  {
 
     static Context acontext;
@@ -23,6 +83,12 @@ public class AttemptListAdapter extends RecyclerView.Adapter<AttemptListAdapter.
         this.acontext = context;
         this.attemptList = list;
     }
+
+    interface ListClickListener {
+        void attemptClicked(Attempt selectedAttempt);
+    }
+
+    public ListClickListener listener;
 
     public static class viewHolder extends RecyclerView.ViewHolder{
         private final TextView aName;
@@ -56,7 +122,7 @@ public class AttemptListAdapter extends RecyclerView.Adapter<AttemptListAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onCountrySelected(allCountriesList.get(position));
+                listener.attemptClicked(attemptList.get(position));
             }
         });
     }
@@ -65,14 +131,10 @@ public class AttemptListAdapter extends RecyclerView.Adapter<AttemptListAdapter.
 
     @Override
     public int getItemCount() {
-        return 0;
+        return attemptList.size();
     }
 
-    interface ListClickListener {
-        void OwnerAttemptClicked(Attempt selectedAttempt);
-    }
 
-    ListClickListener listner;
 
 
 
@@ -80,7 +142,29 @@ public class AttemptListAdapter extends RecyclerView.Adapter<AttemptListAdapter.
 
 
     }
-/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  @Override
     public OwnerCarsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mCtx).inflate(R.layout.owner_item, parent, false);
