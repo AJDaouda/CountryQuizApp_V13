@@ -44,39 +44,31 @@ public class DatabaseManager {
         });
     }
 
-    public List<Attempt> getAllAttempts(){
-        //public void getAllAttempts(){
-        databaseExecutor.execute(new Runnable() {
+    public void getAllAttempts(){
+                databaseExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                List<Attempt> list =  db.getAttemptDAO().getAll();
+                list =  db.getAttemptDAO().getAll();
+               // List<Attempt> list =  db.getAttemptDAO().getAll();
                 db_handler.post(new Runnable() {
                     @Override
                     public void run() {
+
                         listener.databaseAllAttemptsListener(list);
                     }
                 });
 
             }
         });
-return list;
     }
 
 
-    public void deleteAnAttempt(Attempt attempt){
+    public void deleteAttempt(Attempt attempt){
         databaseExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 db.getAttemptDAO().deleteAttempt(attempt);
-                db_handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                       // listener.databaseAllDonationListener(list);
-                    }
-                });
-
             }
         });
-
     }
 }

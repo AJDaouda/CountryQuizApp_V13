@@ -307,9 +307,9 @@ public class QuizActivity extends AppCompatActivity implements NetworkService.Ne
                 currentAttempt=new Attempt(countryName,correctAnswers,points);
                 //db.getAttemptDAO().insertAttempt(currentAttempt);
                 dbManager.insertNewAttempt(currentAttempt);
-                System.out.println("Your current attempt is: "+ currentAttempt);
                 index=0;
                 toAttemptsReport();
+                System.out.println("Your current attempt is: "+ currentAttempt);
                 //Intent toReport = new Intent(this,AttemptsReportActivity.class);
                 //startActivity(toReport);
             }

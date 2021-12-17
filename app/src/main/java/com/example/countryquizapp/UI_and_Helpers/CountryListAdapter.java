@@ -60,6 +60,8 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
             }
         });
     }
+
+
     @Override
     public int getItemCount() {return allCountriesList.size(); }
 }
